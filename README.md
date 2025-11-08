@@ -67,7 +67,7 @@ O projeto usa **Clean Architecture** para separação de responsabilidades.
 
 ---
 
-## 🍳 Receita de Bolo: Como Adicionar uma Nova Funcionalidade
+## 🍳 Como Adicionar uma Nova API
 
 (Ex: "Buscar Pedidos do Usuário")
 
