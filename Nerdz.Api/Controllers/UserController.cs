@@ -35,7 +35,6 @@ namespace Nerdz.Api.Controllers
             var email = User.FindFirstValue(ClaimTypes.Email);
             var nome = User.FindFirstValue("name"); // "name" é o claim padrão do Google/Apple
 
-            // 7. Preencher o "formulário" (Comando)
             var command = new SyncUserCommand
             {
                 FirebaseUid = firebaseUid,
