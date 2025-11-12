@@ -13,20 +13,6 @@ Ele usa .NET 8, Clean Architecture, MediatR e Firebase.
     * Obtenha o arquivo `.json` da **Conta de Serviço (Service Account)** no console do Firebase.
     * Salve este arquivo em um local seguro (ex: `C:\dev-secrets\nerdz-firebase-key.json`).
     * **Não** comite este arquivo no Git!
-4.  **Configurar Segredos (User Secrets):**
-    * No Visual Studio, clique com o botão direito no projeto `Nerdz.Api` > "Gerenciar Segredos do Usuário".
-    * No `secrets.json` que abrir, adicione a configuração:
-    ```json
-    {
-      "Firebase": {
-        "ProjectId": "seu-project-id-do-firebase",
-        "CredentialPath": "C:\\dev-secrets\\nerdz-firebase-key.json"
-      }
-    }
-    ```
-5.  Execute o projeto `Nerdz.Api` (via `dotnet run` ou Visual Studio).
-6.  A API estará rodando em `https://localhost:7123`.
-7.  Acesse `https://localhost:7123/swagger` para ver os endpoints.
 
 ---
 
@@ -87,3 +73,7 @@ O projeto usa **Clean Architecture** para separação de responsabilidades.
         return Ok(resultado);
     }
     ```
+
+    5.**Emulator:** Baixe a SDK do Firebase-tools
+    *configuração no appsettings.json para mexer com a conta do banco local para o JWT
+    *SDK: `npm install -g firebase-tools` -> `firebase --version` (para ver se instalou corretamente)
