@@ -46,17 +46,22 @@ namespace Nerdz.Application.Commands.DeleteGroup
             Query userListQuery = _usuariosCollection.WhereEqualTo("GrupoId", userProfile.GrupoId);
             QuerySnapshot userListSnapshot = await userListQuery.GetSnapshotAsync(cancellationToken);
 
+            WriteBatch batch = _db.StartBatch();
+
             foreach (var userDoc in userListSnapshot.Documents)
             {
                 var user = userDoc.ConvertTo<UserProfile>();
 
-                await userDoc.Reference.UpdateAsync(new Dictionary<string, object>
+                var updateUser = new Dictionary<string, object>
                 {
                     { "grupoId", FieldValue.Delete }
-                }, cancellationToken:cancellationToken);
-            }
+                };
 
-            await groupDocRef.DeleteAsync(cancellationToken: cancellationToken);
+                batch.Update(userDoc.Reference, updateUser);
+            }
+            batch.Delete(groupDocRef);
+
+            await batch.CommitAsync(cancellationToken);
         }
     }
 }
