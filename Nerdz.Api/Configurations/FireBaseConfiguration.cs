@@ -4,6 +4,8 @@ using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Firestore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Nerdz.Api.Services;
+using Nerdz.Application.Services;
 using Nerdz.Domain.Authorization;
 
 namespace Nerdz.Api.Configurations
@@ -56,6 +58,8 @@ namespace Nerdz.Api.Configurations
                 options.AddPolicy(AppPolicies.PremiumUser, policy =>
                     policy.RequireClaim(AppClaimTypes.Premium, "true"));
             });
+
+            builder.Services.AddScoped<IAuthClaimsService, FirebaseClaimsService>();
         }
     }
 }

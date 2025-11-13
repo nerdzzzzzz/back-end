@@ -22,6 +22,7 @@ namespace Nerdz.Domain.Entities
         [FirestoreProperty(AppClaimTypes.Premium)]
         public bool Premium { get; set; } = false;
 
-        // grupo profile
+        [FirestoreProperty("grupoId")]
+        public string GrupoId { get; set; } = string.Empty;
     }
 }
