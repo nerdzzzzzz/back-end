@@ -9,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddRepositories();
 builder.ConfigureFireBase();
 builder.ConfigureMediatr();
 builder.ConfigureFluentValidator();
