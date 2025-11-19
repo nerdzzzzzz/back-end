@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Nerdz.Application.Commands.CreateGroup
 {
-    public class CreateGroupCommand : IRequest<GroupProfile>
+    public class CreateGroupCommand : IRequest<Group>
     {
         [JsonPropertyName("nome")]
         public string Nome { get; set; } = string.Empty;

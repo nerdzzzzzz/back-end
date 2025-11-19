@@ -6,7 +6,7 @@ using Nerdz.Domain.Entities;
 
 namespace Nerdz.Application.Commands.SyncUsers
 {
-    internal class SyncUserCommandHandler : IRequestHandler<SyncUserCommand, UserProfile>
+    internal class SyncUserCommandHandler : IRequestHandler<SyncUserCommand, User>
     {
         private readonly CollectionReference _usersCollection;
         private readonly IAuthClaimsService _authClaimsService;
@@ -17,7 +17,7 @@ namespace Nerdz.Application.Commands.SyncUsers
             _authClaimsService = authClaimsService;
         }
 
-        public async Task<UserProfile> Handle(SyncUserCommand request, CancellationToken cancellationToken)
+        public async Task<User> Handle(SyncUserCommand request, CancellationToken cancellationToken)
         {
 
             var firebaseUid = request.FirebaseUid;
@@ -31,15 +31,15 @@ namespace Nerdz.Application.Commands.SyncUsers
 
             if (snapshot.Exists)
             {
-                return snapshot.ConvertTo<UserProfile>();
+                return snapshot.ConvertTo<User>();
             }
 
-            var newUserProfile = new UserProfile
+            var newUserProfile = new User
             {
                 Email = request.Email ?? "",
-                NomeCompleto = request.Nome ?? "Usuário",
-                Role = AppRoles.User,
-                GrupoId = string.Empty
+                //NomeCompleto = request.Nome ?? "Usuário",
+                //Role = AppRoles.User,
+                //GrupoId = string.Empty
             };
 
             await userDocRef.SetAsync(newUserProfile, cancellationToken: cancellationToken);
