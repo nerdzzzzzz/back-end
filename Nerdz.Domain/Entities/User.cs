@@ -14,6 +14,8 @@ namespace Nerdz.Domain.Entities
         public string Email { get; set; }
         public string ProfilePictureUrl { get; set; }
 
+        public string FirebaseUid { get; set; }
+
         public DateTime CreatedAt { get; set; } // TODO: Logica de criação pelo userRole (se não tiver, ou seja, jwt puro, é o primeiro login) 
         public DateTime? LastLoginAt { get; set; }
 

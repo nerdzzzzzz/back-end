@@ -82,6 +82,7 @@ namespace Nerdz.Infrastructure.Repositories
 
             if (item.Id == Guid.Empty)
             {
+                item.Id = Guid.NewGuid();
                 await dbSet.AddAsync(item, cancellationToken);
             }
             else

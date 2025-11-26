@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Nerdz.Domain.Entities;
+using System.Reflection.Emit;
 
 namespace Nerdz.Infrastructure.Mapping
 {
@@ -26,6 +27,10 @@ namespace Nerdz.Infrastructure.Mapping
 
             builder.HasIndex(u => u.Email)
                 .IsUnique();
+
+            builder.Property(u => u.FirebaseUid)
+                .IsRequired()
+                .HasMaxLength(128);
 
             builder.Property(u => u.ProfilePictureUrl)
                 .HasMaxLength(500) // URLs do Google costumam ser longas
