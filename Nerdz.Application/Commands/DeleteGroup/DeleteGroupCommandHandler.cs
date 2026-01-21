@@ -21,47 +21,47 @@ namespace Nerdz.Application.Commands.DeleteGroup
 
         public async Task Handle(DeleteGroupCommand request, CancellationToken cancellationToken)
         {
-            var userDocRef = _usuariosCollection.Document(request.FirebaseUid);
-            var userSnapshot = await userDocRef.GetSnapshotAsync(cancellationToken);
+            //    var userDocRef = _usuariosCollection.Document(request.FirebaseUid);
+            //    var userSnapshot = await userDocRef.GetSnapshotAsync(cancellationToken);
 
-            if (!userSnapshot.Exists)
-                throw new ValidationException("Perfil de usuário não encontrado.");
+            //    if (!userSnapshot.Exists)
+            //        throw new ValidationException("Perfil de usuário não encontrado.");
 
-            var userProfile = userSnapshot.ConvertTo<UserProfile>();
+            //    var userProfile = userSnapshot.ConvertTo<User>();
 
-            if (string.IsNullOrEmpty(userProfile.GrupoId))
-                throw new ValidationException($"Grupo não achado para o usuario {userProfile.NomeCompleto}");
+            //    if (string.IsNullOrEmpty(userProfile.GrupoId))
+            //        throw new ValidationException($"Grupo não achado para o usuario {userProfile.NomeCompleto}");
 
-            var groupDocRef = _gruposCollection.Document(userProfile.GrupoId);
-            var groupSnapShot = await groupDocRef.GetSnapshotAsync(cancellationToken);
+            //    var groupDocRef = _gruposCollection.Document(userProfile.GrupoId);
+            //    var groupSnapShot = await groupDocRef.GetSnapshotAsync(cancellationToken);
 
-            if (!groupSnapShot.Exists)
-                throw new ValidationException("Grupo de usuário não encontrado.");
+            //    if (!groupSnapShot.Exists)
+            //        throw new ValidationException("Grupo de usuário não encontrado.");
 
-            var userGroup = groupSnapShot.ConvertTo<GroupProfile>();
+            //    var userGroup = groupSnapShot.ConvertTo<Group>();
 
-            if (userGroup.AdminId != request.FirebaseUid)
-                throw new ValidationException("O usuário não é um administrador do grupo.");
+            //    //if (userGroup.AdminId != request.FirebaseUid)
+            //    //    throw new ValidationException("O usuário não é um administrador do grupo.");
 
-            Query userListQuery = _usuariosCollection.WhereEqualTo("GrupoId", userProfile.GrupoId);
-            QuerySnapshot userListSnapshot = await userListQuery.GetSnapshotAsync(cancellationToken);
+            //    //Query userListQuery = _usuariosCollection.WhereEqualTo("GrupoId", userProfile.GrupoId);
+            //    QuerySnapshot userListSnapshot = await userListQuery.GetSnapshotAsync(cancellationToken);
 
-            WriteBatch batch = _db.StartBatch();
+            //    WriteBatch batch = _db.StartBatch();
 
-            foreach (var userDoc in userListSnapshot.Documents)
-            {
-                var user = userDoc.ConvertTo<UserProfile>();
+            //    foreach (var userDoc in userListSnapshot.Documents)
+            //    {
+            //        var user = userDoc.ConvertTo<User>();
 
-                var updateUser = new Dictionary<string, object>
-                {
-                    { "grupoId", FieldValue.Delete }
-                };
+            //        var updateUser = new Dictionary<string, object>
+            //        {
+            //            { "grupoId", FieldValue.Delete }
+            //        };
 
-                batch.Update(userDoc.Reference, updateUser);
-            }
-            batch.Delete(groupDocRef);
+            //        batch.Update(userDoc.Reference, updateUser);
+            //    }
+            //    batch.Delete(groupDocRef);
 
-            await batch.CommitAsync(cancellationToken);
+            //    await batch.CommitAsync(cancellationToken);
         }
     }
 }

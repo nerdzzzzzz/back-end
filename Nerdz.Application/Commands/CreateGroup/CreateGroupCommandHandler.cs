@@ -6,7 +6,7 @@ using System.Security.Authentication;
 
 namespace Nerdz.Application.Commands.CreateGroup
 {
-    public class CreateGroupCommandHandler : IRequestHandler<CreateGroupCommand, GroupProfile>
+    public class CreateGroupCommandHandler : IRequestHandler<CreateGroupCommand, Group>
     {
         private readonly FirestoreDb _db;
         private readonly CollectionReference _gruposCollection;
@@ -19,7 +19,7 @@ namespace Nerdz.Application.Commands.CreateGroup
             _usuariosCollection = _db.Collection("usuarios"); // Coleção de Usuários
         }
 
-        public async Task<GroupProfile> Handle(CreateGroupCommand request, CancellationToken cancellationToken)
+        public async Task<Group> Handle(CreateGroupCommand request, CancellationToken cancellationToken)
         {
 
             var userDocRef = _usuariosCollection.Document(request.FirebaseUid);
@@ -28,16 +28,16 @@ namespace Nerdz.Application.Commands.CreateGroup
             if (!userSnapshot.Exists)
                 throw new ValidationException("Perfil de usuário não encontrado.");
 
-            var userProfile = userSnapshot.ConvertTo<UserProfile>();
+            var userProfile = userSnapshot.ConvertTo<User>();
 
-            if (!string.IsNullOrEmpty(userProfile.GrupoId))
-                throw new ValidationException("Usuário já pertence a um grupo.");
+            //if (!string.IsNullOrEmpty(userProfile.GrupoId))
+            //    throw new ValidationException("Usuário já pertence a um grupo.");
 
-            var newGroup = new GroupProfile
+            var newGroup = new Group
             {
                 Nome = request.Nome,
                 Descricao = request.Descricao,
-                AdminId = request.FirebaseUid
+                //AdminId = request.FirebaseUid
             };
 
             DocumentReference groupRef = await _gruposCollection.AddAsync(newGroup, cancellationToken);
@@ -46,7 +46,7 @@ namespace Nerdz.Application.Commands.CreateGroup
                 { "grupoId", groupRef.Id }
             };
             await userDocRef.UpdateAsync(updates, cancellationToken: cancellationToken);
-            newGroup.Id = groupRef.Id;
+            //newGroup.Id = groupRef.Id;
             return newGroup;
         }
     }

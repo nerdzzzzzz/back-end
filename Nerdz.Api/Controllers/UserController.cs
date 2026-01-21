@@ -20,8 +20,8 @@ namespace Nerdz.Api.Controllers
         }
 
         [HttpPost("sync-me")]
-        [ProducesResponseType(typeof(UserProfile), 201)] // Sucesso - Criado
-        [ProducesResponseType(typeof(UserProfile), 200)] // Sucesso - Já existia
+        [ProducesResponseType(typeof(User), 201)] // Sucesso - Criado
+        [ProducesResponseType(typeof(User), 200)] // Sucesso - Já existia
         [ProducesResponseType(401)] // Erro - Não autorizado
         public async Task<IActionResult> SyncUserOnFirstLogin()
         {

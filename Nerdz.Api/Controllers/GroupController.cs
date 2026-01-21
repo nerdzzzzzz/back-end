@@ -23,7 +23,7 @@ namespace Nerdz.Api.Controllers
         }
 
         [HttpPost("create-group")]
-        [ProducesResponseType(typeof(GroupProfile), 200)]
+        [ProducesResponseType(typeof(Group), 200)]
         [ProducesResponseType(400)] // Erro de validação (ex: já está em grupo)
         [ProducesResponseType(401)] // Não autorizado
         public async Task<IActionResult> CreateGroup([FromBody] CreateGroupCommand command)

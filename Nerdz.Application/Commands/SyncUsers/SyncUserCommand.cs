@@ -4,7 +4,7 @@ using Nerdz.Domain.Entities;
 
 namespace Nerdz.Application.Commands.SyncUsers
 {
-    public class SyncUserCommand : IRequest<UserProfile>
+    public class SyncUserCommand : IRequest<User>
     {
         public string FirebaseUid { get; set; }
         public string Email { get; set; }
