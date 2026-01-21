@@ -1,5 +1,4 @@
 # Projeto Nerdz.Api
- oi gigi
 Este projeto é o back-end para o aplicativo mobile Nerdz.
 Ele usa .NET 8, Clean Architecture, MediatR e Firebase.
 
