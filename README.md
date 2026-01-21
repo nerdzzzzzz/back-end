@@ -77,3 +77,5 @@ O projeto usa **Clean Architecture** para separação de responsabilidades.
     5.**Emulator:** Baixe a SDK do Firebase-tools
     *configuração no appsettings.json para mexer com a conta do banco local para o JWT
     *SDK: `npm install -g firebase-tools` -> `firebase --version` (para ver se instalou corretamente)
+
+    .
